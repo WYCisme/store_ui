@@ -1,0 +1,163 @@
+<template>
+    <div>
+        <el-container class="el-container" >
+            <el-header  class="el-header" style="height: 110px;">
+                <div class="tab">
+                    <ul class="title">
+                        <li> <router-link to="/home">首页</router-link> </li>
+                        <li> <router-link to="/home/myOrder">我的订单</router-link> </li>
+                        <li> <router-link to="/home/shoppingCart">购物车</router-link> </li>
+                        <li> <router-link to="/home/myRecommendation">我的推荐</router-link> </li>
+                        <li>
+                            <el-dropdown @command="handleCommand">
+                                <span >用户：{{user.username}} </span>
+                                <el-dropdown-menu slot="dropdown">
+                                    <el-dropdown-item command="onUserInfo">个人中心</el-dropdown-item>
+                                    <el-dropdown-item command="onSetting">设置</el-dropdown-item>
+                                    <el-dropdown-item command="logout" divided>注销</el-dropdown-item>
+                                </el-dropdown-menu>
+                            </el-dropdown>
+                        </li>
+                    </ul>
+
+                </div>
+
+            </el-header>
+            <el-scrollbar>
+                <el-main>
+                    <div class="el-main">
+                        <div class="search-input" >
+                            <el-input type="text"  prefix-icon="el-icon-search" v-model=searchStr property="搜索商品"
+                                      style="width: 200px; padding-right: 10px"/>
+                            <el-button type="primary" @click="searchGoods()">搜索</el-button>
+                        </div>
+                        <!--<h1>main 内容</h1>-->
+                        <!--<router-view/>-->
+                        <goods-show v-if="this.$route.name=='主页'"></goods-show>
+                        <keep-alive>
+                            <router-view v-if="this.$route.meta.keepAlive"></router-view>
+                        </keep-alive>
+                        <router-view v-if="!this.$route.meta.keepAlive"></router-view>
+                    </div>
+
+                </el-main>
+            </el-scrollbar>
+        </el-container>
+
+    </div>
+</template>
+
+<script>
+    import GoodsShow from "./goodsShow";
+    export default {
+        name: "home",
+        components: {GoodsShow},
+        data(){
+            return {
+                searchStr:null,
+            }
+        },
+        mounted:function () {
+
+        },
+        methods: {
+            handleCommand(cmd){
+                if (cmd === 'logout') {
+                    this.$confirm('注销登录, 是否继续?', '提示', {
+                        confirmButtonText: '确定',
+                        cancelButtonText: '取消',
+                        type: 'warning'
+                    }).then(() => {
+                        // _this.getRequest("/api/logout");
+                        this.$store.commit('logout');
+                        this.$router.replace({path: '/'});
+                    }).catch(() => {
+                        this.$message({
+                            type: 'info',
+                            message: '取消'
+                        });
+                    });
+                }else if(cmd === 'onUserInfo'){
+                    this.$router.push({path: '/userinfoP'});
+                }else if(cmd === 'onSetting'){
+                    this.$router.push({path: '/infoSettingP'});
+                }
+            },
+            searchGoods(){
+                this.postRequest('/api/product/like_name.do?string=' + this.searchStr).then(resp=>{
+                    if (resp && resp.status === 200) {
+                        let data = resp.data;
+                        console.log("查询的数据",data);
+                    }
+                })
+            }
+        },
+        computed: {
+            user(){
+                return this.$store.state.user;
+            },
+            routes(){
+                return this.$store.state.routes;
+            },
+        }
+
+    }
+
+</script>
+
+<style scoped>
+    .el-header, .el-footer {
+        /*background-color: rgba(209, 209, 148, 0.49);*/
+        color: #333;
+        text-align: right;
+        line-height: 60px;
+        padding-bottom: 0px;
+    }
+    .el-main {
+        padding: 0px;
+        margin: 2px;
+        background-color: #E9EEF3;
+        color: #333;
+        text-align: center;
+        line-height: 160px;
+    }
+    .el-container:nth-child(5) .el-aside,
+    .el-container:nth-child(6) .el-aside {
+        line-height: 260px;
+    }
+    .el-container:nth-child(7) .el-aside {
+        line-height: 320px;
+    }
+    .search-input{
+        display:block;
+        margin-left:auto;
+        margin-right:auto;
+    }
+    .home-tab{
+        margin-left: 10px;
+        margin-right: 10px;
+        font-size: 24px;
+    }
+    *{padding:0;margin:0;font:normal 15px "微软雅黑";color:#000;}
+    ul{list-style-type: none;padding-left: 5px;margin-bottom: -2px}
+    .tab{
+        /*width:500px;*/
+        text-align: right;
+        margin: 10px auto
+    }
+    a{text-decoration: none;}
+    .title li{
+        display: inline-block;
+        border: 1px solid #999;
+        border-bottom: 2px solid #a00;
+        background: #fff;
+        text-align: center;
+        width: 100px;
+        height: 30px;
+        margin: 0 1px;
+        line-height: 30px}
+    .title .active{border-top:2px solid #a00;border-bottom: 2px solid #fff; }
+    #content{margin: 0;border: 1px solid #ccc;border-top: 2px solid #a00;width: 300px}
+    #content div{display: none;padding: 10px 0}
+    #content .mod{display: block;}
+</style>
