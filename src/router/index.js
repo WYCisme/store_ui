@@ -36,19 +36,18 @@ export default new Router({
                   requireAuth: true,
                   keepAlive: true
               },
-              children: [
-                  {
-                      path: '/goodsShow/goodsDetail',
-                      name: '商品详细',
-                      component: goodsDetail,
-                      hidden: true,
-                      meta: {
-                          requireAuth: true,
-                          keepAlive: true
-                      },
-                      children: []
-                  },
-              ]
+              children: []
+          },
+          {
+              path: '/home/goodsDetail',
+              name: '商品详细',
+              component: goodsDetail,
+              hidden: true,
+              meta: {
+                  requireAuth: true,
+                  keepAlive: false
+              },
+              children: []
           },
           {
               path: '/home/myOrder',

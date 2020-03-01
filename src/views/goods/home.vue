@@ -26,18 +26,19 @@
             <el-scrollbar>
                 <el-main>
                     <div class="el-main">
-                        <div class="search-input" >
-                            <el-input type="text"  prefix-icon="el-icon-search" v-model=searchStr property="搜索商品"
-                                      style="width: 200px; padding-right: 10px"/>
-                            <el-button type="primary" @click="searchGoods()">搜索</el-button>
-                        </div>
+                        <el-breadcrumb separator-class="el-icon-arrow-right">
+                            <el-breadcrumb-item :to="{ path: '/home' }" >首页</el-breadcrumb-item>
+                            <el-breadcrumb-item  :to="this.$router.currentRoute.path">{{this.$router.currentRoute.name}}</el-breadcrumb-item>
+                        </el-breadcrumb>
                         <!--<h1>main 内容</h1>-->
-                        <!--<router-view/>-->
-                        <goods-show v-if="this.$route.name=='主页'"></goods-show>
+                        <goods-show v-if="this.$route.name==='主页'"></goods-show>
                         <keep-alive>
+                            <!--这里的组件需要被缓存-->
                             <router-view v-if="this.$route.meta.keepAlive"></router-view>
                         </keep-alive>
-                        <router-view v-if="!this.$route.meta.keepAlive"></router-view>
+                        <router-view v-if="!this.$route.meta.keepAlive">
+                            <!--这里的组件不需要被缓存-->
+                        </router-view>
                     </div>
 
                 </el-main>
@@ -83,14 +84,6 @@
                     this.$router.push({path: '/infoSettingP'});
                 }
             },
-            searchGoods(){
-                this.postRequest('/api/product/like_name.do?string=' + this.searchStr).then(resp=>{
-                    if (resp && resp.status === 200) {
-                        let data = resp.data;
-                        console.log("查询的数据",data);
-                    }
-                })
-            }
         },
         computed: {
             user(){
@@ -133,11 +126,6 @@
         margin-left:auto;
         margin-right:auto;
     }
-    .home-tab{
-        margin-left: 10px;
-        margin-right: 10px;
-        font-size: 24px;
-    }
     *{padding:0;margin:0;font:normal 15px "微软雅黑";color:#000;}
     ul{list-style-type: none;padding-left: 5px;margin-bottom: -2px}
     .tab{
@@ -155,7 +143,20 @@
         width: 100px;
         height: 30px;
         margin: 0 1px;
-        line-height: 30px}
+        line-height: 30px;
+    }
+    .title li a{
+        text-align: center;
+        display:block;
+        height:100%;
+        padding-top: 5px;
+    }
+    .el-dropdown{
+        text-align: center;
+        display:block;
+        height:100%;
+        padding-top: 5px;
+    }
     .title .active{border-top:2px solid #a00;border-bottom: 2px solid #fff; }
     #content{margin: 0;border: 1px solid #ccc;border-top: 2px solid #a00;width: 300px}
     #content div{display: none;padding: 10px 0}
