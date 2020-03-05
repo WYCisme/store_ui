@@ -105,14 +105,16 @@
                             console.log("删除购物车里的--",resp.data);
                             this.getMyCart();
                             this.$notify.success({
-                                message: '已删除'
+                                message: '已删除',
+                                offset:100
                             });
                         }
                     })
 
                 }).catch(() => {
                     this.$notify.warning({
-                        message: '已取消删除'
+                        message: '已取消删除',
+                        offset:100
                     });
                 });
 
@@ -157,9 +159,15 @@
                     if (resp && resp.status === 200) {
                         console.log("更新购物车数据");
                         if (resp.data.status === 0) {
-                            this.$notify.success({message: resp.data.data})
+                            this.$notify.success({
+                                message: resp.data.data,
+                                offset:100
+                            })
                         }else {
-                            this.$notify.error({message: resp.data.msg})
+                            this.$notify.error({
+                                message: resp.data.msg,
+                                offset:100
+                            })
                         }
                     }
                 });

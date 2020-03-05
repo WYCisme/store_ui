@@ -26,7 +26,7 @@
             <el-scrollbar>
                 <el-main>
                     <div class="el-main">
-                        <el-breadcrumb separator-class="el-icon-arrow-right">
+                        <el-breadcrumb separator-class="el-icon-arrow-right" style="margin-left: 10px">
                             <el-breadcrumb-item :to="{ path: '/home' }" >首页</el-breadcrumb-item>
                             <el-breadcrumb-item  :to="this.$router.currentRoute.path">{{this.$router.currentRoute.name}}</el-breadcrumb-item>
                         </el-breadcrumb>

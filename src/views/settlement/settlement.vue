@@ -13,7 +13,6 @@
         </div>
         <div align="left" style="margin-top: 10px">
             <el-button @click="dialogFormVisible2 = true" size="mini" type="success" round>选择收获地址</el-button>
-            <el-button @click="dialogFormVisible = true" size="mini" type="primary" round>新增收货地址</el-button>
         </div>
 
         <el-dialog :title="isEdit?'编辑收货地址':'新增收货地址'" :visible.sync="dialogFormVisible" :modal="false" :modal-append-to-body="false" :show-close="false">
@@ -77,6 +76,10 @@
                     </el-table-column>
                 </el-table>
             </div>
+            <div slot="footer" class="dialog-footer">
+                <el-button @click="dialogFormVisible = true" size="mini" type="primary" round>新增收货地址</el-button>
+            </div>
+
         </el-dialog>
 
         <!--商品清单-->
@@ -141,8 +144,6 @@
         components: {ElSelectDropdown},
         data(){
             return{
-                // selectCarts:[],
-                // carts:this.$store.state.cartsTemp,
                 totalPrice:0,
                 dialogFormVisible:false,//地址选择弹出
                 dialogFormVisible2:false,//地址选择弹出
@@ -171,11 +172,7 @@
             }
         },
         mounted:function () {
-            // this.$forceUpdate();
-            // this.selectCarts =this.$store.state.cartsTemp;
-            // this.$set(this.selectCarts,'list',this.$store.state.cartsTemp );
             console.log("商品清单",this.$store.state.cartsTemp);
-
             for (let it of this.selectCarts) {
                 this.totalPrice += it.productTotalPrice;
             }
@@ -204,7 +201,7 @@
                     '&receiverZip='+ this.addrInfo.receiverZip).then(resp=>{
                         if (resp && resp.status === 200) {
                             console.log("地址添加--返回",resp.data);
-                            this.addrInfoShow=this.addrInfo;
+                            // this.addrInfoShow=this.addrInfo;
                         }
                 })
             },
@@ -239,10 +236,19 @@
                 this.dialogFormVisible2=false;
             },
             toPay(){
-                this.postRequest('/api/order/create.do?shippingId=').then(resp=>{
+                if ( ! this.addrInfoShow.id ) {
+                    this.$notify.warning({message:"请选择收货地址",offset:100});
+                    return;
+                }
+                console.log("shippingId",this.addrInfoShow.id);
+                let ids=[];
+                for (let i of this.selectCarts) {
+                    ids.push(i.id);
+                }
+                console.log("ids",ids);
+                this.postRequest('/api/order/create2.do?shippingId='+this.addrInfoShow.id + '&cartIds=' + ids).then(resp=>{
                     if (resp && resp.status === 200) {
-                        console.log("获取所有收货地址",resp.data);
-                        this.addrInfos=resp.data.data.list;
+                        console.log("创建订单-",resp.data);
                     }
                 })
 
