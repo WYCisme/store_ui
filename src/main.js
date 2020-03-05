@@ -5,7 +5,7 @@ import router from './router'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import store from './store'
-
+import { Notification } from 'element-ui';
 
 import {getRequest} from './api/api'
 import {postRequest} from './api/api'
@@ -40,7 +40,7 @@ router.beforeEach((to, from, next)=> {
         next();
         return;
     }
-    var username = store.state.user.username;
+    let username = store.state.user.username;
     console.log('store.state.user.username',username);
     if (username === '未登录' ) {
       if (to.meta.requireAuth || to.name == null) {

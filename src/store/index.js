@@ -7,18 +7,15 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    user: {
-        username: window.localStorage.getItem('user' || '[]') == null ? '未登录' : JSON.parse(window.localStorage.getItem('user' || '[]')).username,
-        // name: window.localStorage.getItem('user' || '[]') == null ? '未登录' : JSON.parse(window.localStorage.getItem('user' || '[]')).name,
-        // userface: window.localStorage.getItem('user' || '[]') == null ? '' : JSON.parse(window.localStorage.getItem('user' || '[]')).userface,
-        // roles: window.localStorage.getItem('user' || '[]') == null ? '' : JSON.parse(window.localStorage.getItem('user' || '[]')).roles
-    },
-    routes: [],
-    // msgList: [],
-    isDotMap: new Map(),
-    // currentFriend: {},
-    stomp: null,
-    nfDot: false
+      user: {
+          username: sessionStorage.getItem('user' || '[]') == null ? '未登录' : JSON.parse(sessionStorage.getItem('user' || '[]')).username,
+
+          // userId: window.localStorage.getItem('user' || '[]') == null ? '' : JSON.parse(window.localStorage.getItem('user' || '[]')).userId,
+          // userface: window.localStorage.getItem('user' || '[]') == null ? '' : JSON.parse(window.localStorage.getItem('user' || '[]')).userface,
+          // roles: window.localStorage.getItem('user' || '[]') == null ? '' : JSON.parse(window.localStorage.getItem('user' || '[]')).roles
+      },
+      // cartsTemp: window.localStorage.getItem('carts' || '[]') == null ? '' :JSON.parse(window.localStorage.getItem('carts' || '[]')),
+      cartsTemp: JSON.parse((sessionStorage.getItem("carts"))),
   },
   mutations: {
     // initMenu(state, menus){
@@ -26,17 +23,20 @@ export default new Vuex.Store({
     // },
     login(state, user){
       state.user = user;
-      window.localStorage.setItem('user', JSON.stringify(user));
+        sessionStorage.setItem('user', JSON.stringify(user));
     },
     logout(state){
       console.log("注销");
       state.user=null;
       state.routes = [];
-      window.localStorage.removeItem('user');
+        sessionStorage.removeItem('user');
     },
-    toggleNFDot(state, newValue){
-      state.nfDot = newValue;
-    },
+      addCartsTemp(state,carts){
+          // window.localStorage.removeItem('carts');
+          state.cartsTemp =JSON.parse(carts);
+          sessionStorage.setItem("carts",carts)
+          // window.localStorage.setItem('carts',carts);
+      }
   },
   actions: {
   }

@@ -6,8 +6,6 @@
             <el-button type="primary" @click="searchGoods()">搜索</el-button>
         </div>
 
-        <h3>商品展示页</h3>
-
         <div style="display: flex;justify-content: space-around;flex-wrap: wrap;text-align: left; vertical-align: super; padding: 5px;">
             <el-card style="width: 300px;margin: 5px; padding: 5px"
                      v-for="(goods,index) in productData.slice((curPage-1)*pagesize,curPage*pagesize)" :key="goods.id">
@@ -87,10 +85,8 @@
                         if (data.data.length > 0) {
                             this.productData = data.data;
                         }else {
-                            this.$message({
-                                type: 'error',
-                                message: '暂无数据！!'
-                            });
+                            this.$notify.warning({message:"搜索数据为空！",offset: 100});
+
                         }
                     }
                 });

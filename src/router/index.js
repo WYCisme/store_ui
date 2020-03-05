@@ -7,6 +7,7 @@ import ShoppingCart from '../views/goods/shoppingCart'
 import myRecommendation from '../views/goods/myRecommendation'
 import goodsShow from '../views/goods/goodsShow'
 import goodsDetail from '../views/goods/goodsShow_Sub/goodsDetail'
+import settlement from '../views/settlement/settlement'
 Vue.use(Router);
 
 export default new Router({
@@ -69,12 +70,25 @@ export default new Router({
               hidden: true,
               meta: {
                   requireAuth: true,
-                  keepAlive: true
+                  keepAlive: false
+              },
+              children: [
+              ]
+          },
+          {
+              path: '/home/settlement',
+              name: '结算',
+              component: settlement,
+              hidden: true,
+              meta: {
+                  requireAuth: true,
+                  keepAlive: false
               },
               children: [
 
               ]
           },
+
           {
               path: '/home/myRecommendation',
               name: '我的推荐',

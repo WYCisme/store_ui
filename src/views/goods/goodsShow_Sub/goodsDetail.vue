@@ -2,7 +2,7 @@
     <div>
         <div align="center">
             <el-button type="danger"  size="mini" plain icon="el-icon-back"
-                        @click="backPage()"> 返回 </el-button>
+                        @click="$router.back()"> 返回 </el-button>
         </div>
 
         <div class="" v-if="isShow">
@@ -13,17 +13,20 @@
                 <div id="right">
                     <div class="itemName">
                         <span>{{goodsDetail.name}}</span><br/>
-                        <span style="color: #cf3322;font-size: medium">{{goodsDetail.subtitle}}</span>
+                        <span style="color: #ff0000;font-size: medium">{{goodsDetail.subtitle}}</span>
                     </div>
-                    <div style="margin-top: 10px; color: #a4abae;">
-                        价格：<span style="font-size: 20px; color: #880000">{{goodsDetail.price}}</span>
+                    <div style="margin-top: 20px; color: #a4abae;">
+                        价格：<span style="font-size: 20px; font-weight: bold; color: #ff0000;">￥{{goodsDetail.price}}</span>
                     </div>
-                    <div style="margin-top: 10px; color: #a4abae;">
+                    <div style="margin-top: 20px; color: #a4abae;">
                         库存：<span style="font-size: 20px; color: #000000">{{goodsDetail.stock}}</span>
                     </div>
                     <br/><br/><br/><br/>
                     <div style="bottom: 10px;">
-                        <el-button type="warning" icon="el-icon-shopping-cart-1">加入购物车</el-button>
+                        <span > 购买数量：</span>
+                        <el-input-number style="width: 150px;" :min="1" :max="goodsDetail.stock" v-model="count"></el-input-number>
+                        <!--<el-input-number v-model="num"  :min="1" :max="10" label="描述文字"></el-input-number>-->
+                        <el-button type="warning" icon="el-icon-shopping-cart-1" @click="addCart()">加入购物车</el-button>
                     </div>
                 </div>
             </div>
@@ -44,6 +47,7 @@
                 goodsDetail :null,
                 isShow:true,//是否显示详情区域
                 returnMsg:"",
+                count:1,//购买数量
 
             }
         },
@@ -51,13 +55,6 @@
             console.log("商品详细",this. productId);
             this.getDetail();
         },
-        // activated(){
-            // this.productId = this.$route.query.productId ? this.$route.query.productId : 0;
-            // this.getDetail();
-        // },
-        // deactivated(){
-        //     this.goodsDetail=null;
-        // },
         methods:{
             getDetail() {
                 if (this.productId > 0) {
@@ -82,12 +79,17 @@
 
                 }
             },
-            backPage(){
-                // this.$route.meta.keepAlive=false;
-                this.goodsDetail=null;
-                // this.$router.back();
-                this.$router.go(-1);
-            },
+            addCart(){
+                this.postRequest('/api/cart/add.do?productId='+ this.productId +'&count= '+this.count ).then(resp => {
+                    if (resp && resp.status === 200 && resp.data.status === 0) {
+                        console.log("添加到购物车--",  resp.data);
+                        // this.$message.success({message:"成功添加到购物车！"});
+                        this.$notify.success({message:"成功添加到购物车！",offset: 100});
+                        //刷新数据
+                        this.getDetail();
+                    }
+                })
+            }
         }
     }
 </script>
