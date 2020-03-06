@@ -175,6 +175,10 @@
                 location.reload()
             },
             goToSettlement(){
+                if (this.selectCarts.length < 1) {
+                    this.$notify.warning({message:'请勾选商品！',offset:100});
+                    return;
+                }
                 this.$store.commit('addCartsTemp',JSON.stringify(this.selectCarts));
                 this.$router.push({path:'/home/settlement'})
             },

@@ -113,13 +113,10 @@
             </el-table-column>
             <el-table-column   label="数量"
                                width="150"
+                               prop="quantity"
                                align="center" >
-                <template slot-scope="scope">
-                    <el-input v-model="scope.row.quantity"  style="width: 100% ; text-align: center" readonly
-                    > </el-input>
-                </template>
             </el-table-column>
-            <el-table-column   label="小计"
+            <el-table-column   label="合计"
                                prop="productTotalPrice"
                                width="150"
                                align="center" >
@@ -128,9 +125,9 @@
         </el-table>
         <p></p>
         <div style=" position:fixed ; bottom:10px;right: 0">
-            <span>总价：{{totalPrice}}</span>
+            <span>商品总价：{{totalPrice}}</span>
             <el-button type="danger" round style="margin-right: 20px; margin-left: 20px; font-weight: bolder;font-size: large;color: #ffffff;"
-                       @click="toPay">去 支 付</el-button>
+                       @click="submitOrder">提交订单</el-button>
         </div>
 
 
@@ -184,7 +181,7 @@
                 this.getRequest('/api/shipping/list.do').then(resp=>{
                     if (resp && resp.status === 200) {
                         console.log("获取所有收货地址",resp.data);
-                        this.addrInfos=resp.data.data.list;
+                        this.addrInfos=resp.data.data;
                     }
                 })
             },
@@ -235,7 +232,7 @@
                 this.addrInfoShow=row;
                 this.dialogFormVisible2=false;
             },
-            toPay(){
+            submitOrder(){
                 if ( ! this.addrInfoShow.id ) {
                     this.$notify.warning({message:"请选择收货地址",offset:100});
                     return;
@@ -249,6 +246,8 @@
                 this.postRequest('/api/order/create2.do?shippingId='+this.addrInfoShow.id + '&cartIds=' + ids).then(resp=>{
                     if (resp && resp.status === 200) {
                         console.log("创建订单-",resp.data);
+                        this.$notify.success({message:"订单提交成功！",offset:100});
+
                     }
                 })
 

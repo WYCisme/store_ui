@@ -13,8 +13,14 @@
             }
         },
         mounted:function () {
-
+            console.log("支付页-订单编号",this.OrderNo)
         },
+        computed:{
+            OrderNo(){
+                return this.$store.state.OrderNo
+            }
+        },
+
         methods:{
 
         }

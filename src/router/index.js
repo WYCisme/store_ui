@@ -8,6 +8,8 @@ import myRecommendation from '../views/goods/myRecommendation'
 import goodsShow from '../views/goods/goodsShow'
 import goodsDetail from '../views/goods/goodsShow_Sub/goodsDetail'
 import settlement from '../views/settlement/settlement'
+import orderDetail from '../views/goods/orderDetail'
+
 Vue.use(Router);
 
 export default new Router({
@@ -57,12 +59,24 @@ export default new Router({
               hidden: true,
               meta: {
                   requireAuth: true,
-                  keepAlive: true
+                  keepAlive: false
               },
               children: [
-
               ]
           },
+          {
+              path: '/home/myOrder/orderDetail',
+              name: '订单详细',
+              component: orderDetail,
+              hidden: true,
+              meta: {
+                  requireAuth: true,
+                  keepAlive: false
+              },
+              children: [
+              ]
+          },
+
           {
               path: '/home/shoppingCart',
               name: '购物车',

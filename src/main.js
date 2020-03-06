@@ -41,7 +41,6 @@ router.beforeEach((to, from, next)=> {
         return;
     }
     let username = store.state.user.username;
-    console.log('store.state.user.username',username);
     if (username === '未登录' ) {
       if (to.meta.requireAuth || to.name == null) {
         next({path: '/', query: {redirect: to.path}})
