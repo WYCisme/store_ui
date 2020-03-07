@@ -1,20 +1,21 @@
 <template>
-    <div>
+    <div >
         <el-tabs style="margin-top: 10px;"  @tab-click="handleClick" stretch type="card" v-model="defaultTabs">
             <el-tab-pane label="历史热门" name="1"></el-tab-pane>
             <el-tab-pane label="优质商品" name="2"></el-tab-pane>
             <el-tab-pane label="猜你喜欢" name="3"></el-tab-pane>
         </el-tabs>
-        <div style="display: flex;justify-content: space-around;flex-wrap: wrap;text-align: left; vertical-align: super; padding: 5px;">
-            <el-card style="width: 200px;margin: 1px 1px 1px 1px; padding: 5px"
+        <div style="clear: both; display: flex;justify-content: space-around;flex-wrap: wrap;
+                    text-align: left; vertical-align: super; padding: 5px;"
+        >
+            <el-card style="width: 200px;margin: 1px 1px 1px 1px; padding: 2px ;"
                      v-for="(goods,index) in goodsData.slice((curPage-1)*pagesize,curPage*pagesize)" :key="goods.id">
-                <div  @click="checkDetail(goods.id)" style="padding: 5px">
-
-                    <div style="text-align: center; padding: 0px ; margin: 0px;" >
-                        <img :src="goods.mainImage" alt="商品图片" width="150" style="padding: 0px ; margin: 0px;"/>
+                <div  @click="checkDetail(goods.id)" style="padding: 2px">
+                    <div style="text-align: center; padding: 0 ; margin: 0;" >
+                        <img :src="goods.mainImage" alt="商品图片" width="150" style="padding: 0 ; margin: 0;"/>
                     </div>
                     <span>{{goods.name}}</span><br/>
-                    <span>{{goods.subtitle}}</span>
+                    <span style="color: #ff0000;">{{goods.subtitle}}</span>
                 </div>
             </el-card>
         </div>
