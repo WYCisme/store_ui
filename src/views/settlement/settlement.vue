@@ -1,6 +1,10 @@
 <template>
     <div style="margin: 10px 10px">
-        <h1>商品结算</h1>
+        <div align="center">
+            <el-button type="danger"  size="mini" plain icon="el-icon-back"
+                       @click="$router.back()"> 返回 </el-button>
+        </div>
+
         <!--收货地址-->
         <h1 align="left">收货地址</h1>
         <div style="width: 240px;height: 60px;border:1px dashed #cf3322 ;text-align: left;padding-left: 20px">
@@ -247,7 +251,9 @@
                     if (resp && resp.status === 200) {
                         console.log("创建订单-",resp.data);
                         this.$notify.success({message:"订单提交成功！",offset:100});
-
+                        let orderNo=resp.data.data.orderNo;
+                        this.$store.commit('addOrderNo',orderNo);
+                        this.$router.replace({path:'/home/payPage'});
                     }
                 })
 

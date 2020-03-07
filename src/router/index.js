@@ -9,6 +9,7 @@ import goodsShow from '../views/goods/goodsShow'
 import goodsDetail from '../views/goods/goodsShow_Sub/goodsDetail'
 import settlement from '../views/settlement/settlement'
 import orderDetail from '../views/goods/orderDetail'
+import payPage from '../views/settlement/payPage'
 
 Vue.use(Router);
 
@@ -101,6 +102,18 @@ export default new Router({
               children: [
 
               ]
+          },{
+              path: '/home/payPage',
+              name: '支付页面',
+              component: payPage,
+              hidden: true,
+              meta: {
+                  requireAuth: true,
+                  keepAlive: false
+              },
+              children: [
+
+              ]
           },
 
           {
@@ -110,7 +123,7 @@ export default new Router({
               hidden: true,
               meta: {
                   requireAuth: true,
-                  keepAlive: true
+                  keepAlive: false
               },
               children: [
 

@@ -1,5 +1,10 @@
 <template>
     <div style="margin-left: 10px;">
+        <div align="center">
+            <el-button type="danger"  size="mini" plain icon="el-icon-back"
+                       @click="$router.back()"> 返回 </el-button>
+        </div>
+
         <!--订单信息-->
         <h3 style=" margin-left: 10px; font-weight: normal; margin-bottom: 0;margin-top: 30px " align="left">订单信息</h3><br/>
         <div align="left" style="margin-left: 10px; width: 600px; padding-top: 10px;padding-bottom: 10px">

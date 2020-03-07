@@ -31,7 +31,8 @@
                                     <div style="clear:both; font-size: medium; margin-left: 20px">
                                         <span>订单编号：{{v.row.orderNo}}</span>
                                         <span style="margin-left: 20px; color: #ff0000;font-weight: bold">商品金额：{{v.row.payment}}</span>
-                                        <el-button style="margin-left: 30px;" type="primary" size="medium" v-if="v.row.statusDesc==='未支付'">去支付</el-button>
+                                        <el-button style="margin-left: 30px;" type="primary" size="medium"
+                                                   v-if="v.row.statusDesc==='未支付'" @click="toPay(v.row.orderNo)">去支付</el-button>
                                         <span style="margin-left: 30px;" v-else-if="v.row.statusDesc==='已取消'">已取消</span>
                                         <span style="margin-left: 30px;" v-if="v.row.statusDesc==='订单关闭'">订单关闭</span>
                                     </div>
@@ -105,9 +106,9 @@
 
                       for (let i of this.orderList) {
                           if (i.statusDesc === "未支付" ||i.statusDesc === "已取消" ||i.statusDesc === "订单关闭" ) {
-                              this.orderF.push(i);
+                              this.orderF.push(i);//未完成
                           }else {
-                              this.orderT.push(i);
+                              this.orderT.push(i);//已完成
                           }
                       }
                       console.log("订单数据F",this.orderF);
@@ -119,6 +120,10 @@
                 this.$store.commit('addOrderDetail',JSON.stringify(row));
                 this.$router.push({path:'/home/myOrder/orderDetail'});
 
+            },
+            toPay(orderNo){
+                this.$store.commit('addOrderNo',orderNo);
+                this.$router.push({path:'/home/payPage'});
             },
         }
     }
