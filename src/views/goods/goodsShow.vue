@@ -6,13 +6,12 @@
             <el-button type="primary" @click="searchGoods()">搜索</el-button>
         </div>
 
-        <div style="display: flex;justify-content: space-around;flex-wrap: wrap;text-align: left; vertical-align: super; padding: 5px;">
-            <el-card style="width: 250px;margin: 5px; padding: 5px"
+        <div style="display: flex;flex-wrap: wrap;text-align: left; vertical-align: super; padding: 5px;">
+            <el-card style="width: 250px;margin: 8px; padding: 5px"
                      v-for="(goods,index) in productData.slice((curPage-1)*pagesize,curPage*pagesize)" :key="goods.id">
-                <div  @click="checkDetail(goods.id)" style="padding: 5px">
-
+                <div  @click="checkDetail(goods.id)" style="padding: 2px">
                     <div style="text-align: center; padding: 0 ; margin: 0;" >
-                        <img :src="goods.mainImage" alt="商品图片" width="200" style="padding: 0 ; margin: 0;"/>
+                        <img :src="goods.mainImage" alt="商品图片" width="150" style="padding: 0 ; margin: 0;"/>
                     </div>
                     <span>{{goods.name}}</span><br/>
                     <span style="color: #ff0000;">{{goods.subtitle}}</span>

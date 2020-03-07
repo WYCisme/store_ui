@@ -123,7 +123,7 @@ export default new Router({
               hidden: true,
               meta: {
                   requireAuth: true,
-                  keepAlive: false
+                  keepAlive: true
               },
               children: [
 

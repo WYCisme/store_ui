@@ -5,10 +5,8 @@
             <el-tab-pane label="优质商品" name="2"></el-tab-pane>
             <el-tab-pane label="猜你喜欢" name="3"></el-tab-pane>
         </el-tabs>
-        <div style="clear: both; display: flex;justify-content: space-around;flex-wrap: wrap;
-                    text-align: left; vertical-align: super; padding: 5px;"
-        >
-            <el-card style="width: 200px;margin: 1px 1px 1px 1px; padding: 2px ;"
+        <div style="display: flex; flex-wrap: wrap;text-align: left; vertical-align: super; padding: 5px; " >
+            <el-card style="width: 200px;margin: 8px; padding: 2px ; "
                      v-for="(goods,index) in goodsData.slice((curPage-1)*pagesize,curPage*pagesize)" :key="goods.id">
                 <div  @click="checkDetail(goods.id)" style="padding: 2px">
                     <div style="text-align: center; padding: 0 ; margin: 0;" >
@@ -40,7 +38,7 @@
         name: "myRecommendation",
         data(){
             return{
-                pagesize:6,
+                pagesize:10,
                 curPage:1,
                 defaultTabs:"1",
                 goodsData:[],//展示数据
