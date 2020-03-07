@@ -1,7 +1,7 @@
 <template>
     <div>
-        <el-container class="el-container" >
-            <el-header  class="el-header" style="height: 110px;">
+        <el-container class="el-container" style="position: absolute; width: 100%"  >
+            <el-header  class="el-header" style="height: 110px; right: 0; left: 0; position: fixed;">
                 <div class="tab">
                     <ul class="title">
                         <li> <router-link to="/home">首页</router-link> </li>
@@ -18,31 +18,31 @@
                                 </el-dropdown-menu>
                             </el-dropdown>
                         </li>
-                    </ul>
-
+                    </ul><br/>
+                    <el-breadcrumb separator-class="el-icon-arrow-right" style="margin-left: 10px">
+                        <el-breadcrumb-item :to="{ path: '/home' }" >首页</el-breadcrumb-item>
+                        <el-breadcrumb-item  :to="this.$router.currentRoute.path">{{this.$router.currentRoute.name}}</el-breadcrumb-item>
+                    </el-breadcrumb>
                 </div>
 
             </el-header>
-            <el-scrollbar>
-                <el-main>
-                    <div class="el-main">
-                        <el-breadcrumb separator-class="el-icon-arrow-right" style="margin-left: 10px">
-                            <el-breadcrumb-item :to="{ path: '/home' }" >首页</el-breadcrumb-item>
-                            <el-breadcrumb-item  :to="this.$router.currentRoute.path">{{this.$router.currentRoute.name}}</el-breadcrumb-item>
-                        </el-breadcrumb>
-                        <!--<h1>main 内容</h1>-->
-                        <goods-show v-if="this.$route.name==='主页'"></goods-show>
-                        <keep-alive>
-                            <!--这里的组件需要被缓存-->
-                            <router-view v-if="this.$route.meta.keepAlive"></router-view>
-                        </keep-alive>
-                        <router-view v-if="!this.$route.meta.keepAlive">
-                            <!--这里的组件不需要被缓存-->
-                        </router-view>
-                    </div>
+            <el-main  style="top: 120px;bottom: 0;right: 0; left: 0; position: fixed;">
+                <!--<el-scrollbar>-->
+                <div >
+                    <!--<h1>main 内容</h1>-->
+                    <goods-show v-if="this.$route.name==='主页'"></goods-show>
+                    <keep-alive>
+                        <!--这里的组件需要被缓存-->
+                        <router-view v-if="this.$route.meta.keepAlive" style="width: 100%"></router-view>
+                    </keep-alive>
+                    <router-view v-if="!this.$route.meta.keepAlive"  style="width: 100%">
+                        <!--这里的组件不需要被缓存-->
+                    </router-view>
+                </div>
+                <!--</el-scrollbar>-->
+            </el-main>
 
-                </el-main>
-            </el-scrollbar>
+
         </el-container>
 
     </div>
@@ -131,7 +131,7 @@
     .tab{
         /*width:500px;*/
         text-align: right;
-        margin: 10px auto
+        margin: 10px auto;
     }
     a{text-decoration: none;}
     .title li{

@@ -1,6 +1,5 @@
 <template>
     <div>
-        <h1>购物车</h1>
         <el-table
                 :data="theCart.cartProductVoList"
                 tooltip-effect="dark"

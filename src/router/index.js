@@ -7,9 +7,9 @@ import ShoppingCart from '../views/goods/shoppingCart'
 import myRecommendation from '../views/goods/myRecommendation'
 import goodsShow from '../views/goods/goodsShow'
 import goodsDetail from '../views/goods/goodsShow_Sub/goodsDetail'
-import settlement from '../views/settlement/settlement'
-import orderDetail from '../views/goods/orderDetail'
-import payPage from '../views/settlement/payPage'
+import settlement from '../views/goods/shoppingCart_sub/settlement'
+import orderDetail from '../views/goods/myOrder_sub/orderDetail'
+import payPage from '../views/goods/shoppingCart_sub/payPage'
 
 Vue.use(Router);
 
