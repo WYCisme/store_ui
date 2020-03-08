@@ -83,7 +83,6 @@
                 this.postRequest('/api/cart/add.do?productId='+ this.productId +'&count= '+this.count ).then(resp => {
                     if (resp && resp.status === 200 && resp.data.status === 0) {
                         console.log("添加到购物车--",  resp.data);
-                        // this.$message.success({message:"成功添加到购物车！"});
                         this.$notify.success({message:"成功添加到购物车！",offset: 100});
                         //刷新数据
                         this.getDetail();

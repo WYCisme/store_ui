@@ -1,54 +1,54 @@
 import axios from 'axios'
-import {Message} from 'element-ui'
+import {Message,Notification} from 'element-ui'
 axios.interceptors.request.use(config => {
   return config;
 }, err => {
-  Message.error({message: '请求超时!'});
+  Notification.error({message: '请求超时!',offset:50});
   // return Promise.resolve(err);
 })
 axios.interceptors.response.use(
   data => {
     if (data.status && data.status === 200 && data.data.status === 500) {
       if (data.data.msg) {
-        Message.error({message: data.data.msg});
+        Notification.error({message: data.data.msg,offset:50});
         return;
       }
     }else if (data.data.status === 10){
-      Message.error({message:data.data.msg});
+      Notification.error({message:data.data.msg,offset:50});
         setTimeout(()=>{
             window.location.href="/";
         },1000);
         return;
     }
       if (data.data.msg) {
-          // Message.success({message: data.data.msg});
+          // Notification.success({message: data.data.msg});
       }
     return data;
   },
   error => {
     if (error.response.status === 504 || error.response.status === 404) {
-        Message.error({message: '找不到服务器···'});
+        Notification.error({message: '找不到服务器...',offset:50});
 
       } else if (error.response.status === 403) {
       if (error.response.data.status === 402) {
-        Message.error({message: '请登录！'});
+        Notification.error({message: '请登录！',offset:50});
         setTimeout(()=>{
           window.location.href="/";
         },1000);
 
       }else if(error.response.data.status===500) {
-        Message.error({message: '权限不足,请联系管理员!'});
+        Notification.error({message: '权限不足,请联系管理员!',offset:50});
       }else {
-        Message.error({message: error.response.data.meg});
+        Notification.error({message: error.response.data.meg,offset:50});
 
       }
     } else if (error.response.status === 401) {
-        Message.error({message: error.response.data.msg});
+        Notification.error({message: error.response.data.msg,offset:50});
       } else {
         if (error.response.data.msg) {
-          Message.error({message: error.response.data.msg});
+          Notification.error({message: error.response.data.msg,offset:50});
         } else {
-          Message.error({message: '未知错误!'});
+          Notification.error({message: '未知错误!',offset:50});
         }
       }
 

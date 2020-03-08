@@ -40,7 +40,7 @@
 
         data(){
             return{
-                pagesize:6,
+                pagesize:10,
                 curPage:1,
 
                 productData:null,

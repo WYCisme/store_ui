@@ -73,9 +73,10 @@
                         this.$store.commit('logout');
                         this.$router.replace({path: '/'});
                     }).catch(() => {
-                        this.$message({
+                        this.$notify({
                             type: 'info',
-                            message: '取消'
+                            message: '取消',
+                            offset:50
                         });
                     });
                 }else if(cmd === 'onUserInfo'){
