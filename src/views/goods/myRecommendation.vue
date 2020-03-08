@@ -6,7 +6,7 @@
             <el-tab-pane label="猜你喜欢" name="3"></el-tab-pane>
         </el-tabs>
         <div style="display: flex; flex-wrap: wrap;text-align: left; vertical-align: super; padding: 5px; " >
-            <el-card style="width: 200px;margin: 8px; padding: 2px ; "
+            <el-card style="width: 200px;margin: 8px; padding: 2px ; font-size: small; "
                      v-for="(goods,index) in goodsData.slice((curPage-1)*pagesize,curPage*pagesize)" :key="goods.id">
                 <div  @click="checkDetail(goods.id)" style="padding: 2px">
                     <div style="text-align: center; padding: 0 ; margin: 0;" >

@@ -26,7 +26,7 @@
 
         methods:{
             doPay() {
-                this.postRequest('/api/order/pay.do?orderNo=' + this.OrderNo).then(resp => {
+                this.postRequest('/api/order/pay2.do?orderNo=' + this.OrderNo).then(resp => {
                     if (resp && resp.status === 200) {
                         console.log("支付请求-",resp.data);
                         this.payImg = resp.data.data.qrUrl;

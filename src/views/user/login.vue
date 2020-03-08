@@ -3,7 +3,7 @@
     <!--<img src="/static/img/loginImg/loginbgi.png" height="100%" width="100%"/>-->
     <el-form :rules="rules" class="login-container" label-position="left" :model="loginForm"
            label-width="0px" v-loading="loading">
-    <h3 class="login_title">系统登录</h3>
+    <h3 class="login_title">{{this.thePageTile}}</h3>
     <el-form-item prop="username">
       <el-input type="text" v-model="loginForm.username" @keyup.enter.native="submitClick" name="username"
                 auto-complete="off" placeholder="账号" prefix-icon="el-icon-user"></el-input>
@@ -35,6 +35,7 @@
   export default{
     data(){
       return {
+          loginUrl:'/user/login.do',
         rules: {
           username: [{required: true, message: '请输入用户名', trigger: 'blur'}],
           password: [{required: true, message: '请输入密码', trigger: 'blur'}]
@@ -44,14 +45,25 @@
           username: '',
           password: ''
         },
-        loading: false
+        loading: false,
+          thePageTile:'用户登录',
+          toPath:'/home',
       }
     },
+      mounted:function(){
+          for (let i of window.location.href.split('/'))
+              if ('admin#' === i || 'admin#' === i ) {//管理员登录的情况
+                  this.thePageTile = '管理员登录';
+                  this.toPath='admin_home';
+                  this.loginUrl='/manage/user/login.do';
+              }
+
+      },
     methods: {
       submitClick: function () {
           this.loading = true;
         // let paswordEncode=Base64.encode(this.loginForm.password); //使用base64对密码编码
-        this.postLoginRequest('/api/user/login.do', {
+        this.postLoginRequest('/api' + this.loginUrl, {
           username: this.loginForm.username,
         //   password: paswordEncode
           password: this.loginForm.password
@@ -63,7 +75,7 @@
               this.$store.commit('login', data.data);
               let path = this.$route.query.redirect;
               console.log("请求路径：",path);
-              this.$router.replace({path: path === '/' || path === undefined ? '/home' : path});
+              this.$router.replace({path: path === '/' || path === undefined ? this.toPath : path});
           }
         });
       }
@@ -74,7 +86,7 @@
   .login-div{
     width: 100%;
     height: 100%;
-    background: url('/src/assets/img/loginImg/loginbgi.png');
+    background: url('/public/loginImg/loginbgi.png');
     background-size:cover;
 
   }
@@ -93,7 +105,7 @@
   .login_title {
     margin: 0px auto 40px auto;
     text-align: center;
-    color: #fffbf9;
+    color: #000000;
   }
   .login_remember {
     margin: 0px 0px 35px 0px;

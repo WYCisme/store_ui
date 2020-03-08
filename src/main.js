@@ -12,9 +12,8 @@ import {postRequest} from './api/api'
 import {postLoginRequest} from './api/api'
 import {deleteRequest} from './api/api'
 import {putRequest} from './api/api'
-import {initMenu} from './api/utils'
-import {isNotNullORBlank} from './api/utils'
 
+import {objectToParma} from './api/utils'
 
 import './api/filter_utils'
 import 'font-awesome/css/font-awesome.min.css'
@@ -29,12 +28,12 @@ Vue.prototype.postRequest = postRequest;
 Vue.prototype.postLoginRequest = postLoginRequest;
 Vue.prototype.deleteRequest = deleteRequest;
 Vue.prototype.putRequest = putRequest;
-Vue.prototype.isNotNullORBlank = isNotNullORBlank;
+Vue.prototype.objectToParma=objectToParma;
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 
 router.beforeEach((to, from, next)=> {
-    console.log("router.beforeEach");
+    console.log("router.beforeEach",router.options.routes);
     console.log("to",to.name,"from",from.name,"next",next.name);
     if (to.name === 'Login') {
         next();

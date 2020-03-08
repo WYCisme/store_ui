@@ -29,7 +29,8 @@ axios.interceptors.response.use(
     if (error.response.status === 504 || error.response.status === 404) {
         Notification.error({message: '找不到服务器...',offset:50});
 
-      } else if (error.response.status === 403) {
+
+    } else if (error.response.status === 403) {
       if (error.response.data.status === 402) {
         Notification.error({message: '请登录！',offset:50});
         setTimeout(()=>{
