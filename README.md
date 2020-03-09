@@ -1,7 +1,5 @@
-<<<<<<< HEAD
-** 简单商城购物
 # store_ui
-=======
+=======** 简单商城购物
 # store_ui
 
 ## Project setup
