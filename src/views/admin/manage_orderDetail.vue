@@ -10,35 +10,35 @@
         <div align="left" style="margin-left: 10px; width: 600px; padding-top: 10px;padding-bottom: 10px">
             <span style="margin-left: 10px;">
                 <span style="font-weight: bold ;">订 单 号 ：</span>
-                {{orderDetail.orderNo}}</span>
+                {{manage_orderDetail.orderNo}}</span>
             <span style="margin-left: 10px;">
                 <span style="font-weight: bold ;">创建时间：</span>
-                {{orderDetail.orderItemVoList[0].createTime}}</span>
+                {{manage_orderDetail.orderItemVoList[0].createTime}}</span>
             <br/><br/>
             <span style="margin-left: 10px;">
                 <span style="font-weight: bold ;">收货信息：</span>
-                {{orderDetail.shippingVo.receiverProvince}}-
-                {{orderDetail.shippingVo.receiverCity}}-
-                {{orderDetail.shippingVo.receiverAddress}}
-                {{orderDetail.shippingVo.receiverMobile}}
-                {{orderDetail.shippingVo.receiverName}}(收)
+                {{manage_orderDetail.shippingVo.receiverProvince}}-
+                {{manage_orderDetail.shippingVo.receiverCity}}-
+                {{manage_orderDetail.shippingVo.receiverAddress}}
+                {{manage_orderDetail.shippingVo.receiverMobile}}
+                {{manage_orderDetail.shippingVo.receiverName}}(收)
             </span>
             <br/><br/>
             <span style="margin-left: 10px;">
                 <span style="font-weight: bold ;">订单状态：</span>
-                <span style="color: #ff0000; font-weight: bold ;">{{orderDetail.statusDesc}}</span>
+                <span style="color: #ff0000; font-weight: bold ;">{{manage_orderDetail.statusDesc}}</span>
 
             </span>
             <span style="margin-left: 10px;">
                <span style="font-weight: bold ;">支付方式：</span>
-                <span style="color: #003992; ">{{orderDetail.paymentTypeDesc}}</span>
+                <span style="color: #003992; ">{{manage_orderDetail.paymentTypeDesc}}</span>
             </span>
         </div>
         <!--商品清单-->
         <br/>
         <h3 style=" margin-left: 10px; font-weight: normal;  " align="left">商品清单</h3>
         <el-table
-                :data="orderDetail.orderItemVoList"
+                :data="manage_orderDetail.orderItemVoList"
                 tooltip-effect="dark"
                 style="width: 100% ; "
                 border stripe
@@ -78,7 +78,7 @@
         </el-table>
         <p></p>
         <div style=" position:fixed ; right: 100px">
-            商品总价：<span style="color: #ff0000; font-weight: bolder">{{orderDetail.payment}}</span>
+            商品总价：<span style="color: #ff0000; font-weight: bolder">{{manage_orderDetail.payment}}</span>
         </div>
     </div>
 </template>
@@ -91,11 +91,11 @@
             }
         },
         mounted:function () {
-            console.log("订单详情",this.orderDetail)
+            console.log("订单详情",this.manage_orderDetail)
         },
         computed:{
-            orderDetail(){
-                return this.$store.state.orderDetail
+            manage_orderDetail(){
+                return this.$store.state.manage_orderDetail
             }
         }
     }

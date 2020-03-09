@@ -16,7 +16,7 @@ export default new Vuex.Store({
       // cartsTemp: window.localStorage.getItem('carts' || '[]') == null ? '' :JSON.parse(window.localStorage.getItem('carts' || '[]')),
       cartsTemp: JSON.parse(sessionStorage.getItem("carts")),
       OrderNo:JSON.parse(sessionStorage.getItem('OrderNo')),//订单编号
-      orderDetail:JSON.parse(sessionStorage.getItem('orderDetail')),//查看订单详情
+      orderDetail:JSON.parse(sessionStorage.getItem('manage_orderDetail')),//查看订单详情
   },
   mutations: {
     // initMenu(state, menus){
@@ -44,7 +44,7 @@ export default new Vuex.Store({
       },
       addOrderDetail(state,orderNo){
         state.orderDetail =JSON.parse(orderNo);
-        sessionStorage.setItem("orderDetail",orderNo)
+        sessionStorage.setItem("manage_orderDetail",orderNo)
       },
   },
   actions: {

@@ -86,7 +86,7 @@
   .login-div{
     width: 100%;
     height: 100%;
-    background: url('/public/loginImg/loginbgi.png');
+    background: url('/src/assets/img/loginImg/loginbgi.png');
     background-size:cover;
 
   }

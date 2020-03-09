@@ -253,7 +253,32 @@
                         this.$notify.success({message:"订单提交成功！",offset:100});
                         let orderNo=resp.data.data.orderNo;
                         this.$store.commit('addOrderNo',orderNo);
-                        this.$router.replace({path:'/home/payPage'});
+                        // this.$router.replace({path:'/home/payPage'});//暂时不用跳转，只做逻辑
+
+                        this.$confirm('现在支付？', '提示', {
+                            confirmButtonText: '确定',
+                            cancelButtonText: '稍后',
+                            type: 'warning'
+                        }).then(() => {
+                            // this.$router.replace({path:'/home/payPage'});//暂时不用跳转，只做逻辑
+                            this.postRequest('/api/order/pay2.do?orderNo=' + orderNo).then(resp => {
+                                if (resp && resp.status === 200) {
+                                    console.log("支付请求-",resp.data);
+                                    this.$notify({
+                                        type: 'success',
+                                        message: '支付成功!',
+                                        offset:50
+                                    });
+                                }
+                            });
+                        }).catch(() => {
+                            this.$notify({
+                                type: 'info',
+                                message: '已取消支付',
+                                offset:50
+                            });
+                        });
+
                     }
                 })
 

@@ -179,7 +179,7 @@ export default new Router({
               {
                   path: '/Manage_Order/manage_orderDetail',
                   name: '订单详细',
-                  component: ()=>import('../views/admin/orderDetail'),
+                  component: ()=>import('../views/admin/manage_orderDetail'),
                   hidden: true,
                   meta: {
                       requireAuth: true,
