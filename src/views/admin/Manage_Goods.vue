@@ -13,8 +13,8 @@
                     <el-card style="width: 250px;margin: 8px; padding: 5px ; font-size: small"
                              v-for="(goods,index) in productData.slice((curPage-1)*pagesize,curPage*pagesize)" :key="goods.id">
                         <div  @click="checkDetail(goods.id)" style="padding: 2px">
-                            <div style="text-align: center; padding: 0 ; margin: 0;" >
-                                <img :src="goods.mainImage" alt="商品图片" width="150" style="padding: 0 ; margin: 0;"/>
+                            <div style="text-align: center; padding: 0 ; margin: 0;width: 150px; height: 300px;" >
+                                <img :src="goods.mainImage" alt="商品图片" width="100%" style="padding: 0 ; margin: 0;"/>
                             </div>
                             <span>{{goods.name}}</span><br/>
                             <span style="color: #ff0000;">{{goods.subtitle}}</span>

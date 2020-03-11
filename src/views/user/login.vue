@@ -66,10 +66,14 @@
           if (resp && resp.status === 200) {
               let data = resp.data;
               console.log("登录返回数据：",data);
-              this.$store.commit('login', data.data);
-              let path = this.$route.query.redirect;
-              console.log("请求路径：",path);
-              this.$router.replace({path: path === '/' || path === undefined ? this.toPath : path});
+              if (data.status === 0) {
+                  this.$store.commit('login', data.data);
+                  let path = this.$route.query.redirect;
+                  console.log("请求路径：", path);
+                  this.$router.replace({path: path === '/' || path === undefined ? this.toPath : path});
+              }else {
+                  this.$notify.error({message:resp.data.msg,offset:50})
+              }
           }
         });
       }
