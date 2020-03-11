@@ -1,7 +1,5 @@
-<<<<<<< HEAD
-** 简单商城购物
 # store_ui
-=======
+  简单商城购物
 # store_ui
 
 ## Project setup
@@ -26,4 +24,3 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
->>>>>>> 首次提交
