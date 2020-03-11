@@ -60,12 +60,33 @@ axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 let base = '';
 
 export const getRequest = (url) => {
+  // url = url.replace('/api/', '/');
+  console.log("请求路径：",url);
   return axios({
     method: 'get',
     url: `${base}${url}`,
   });
 };
+export const postRequest = (url, params) => {
+    // url = url.replace('/api/', '/');
+    console.log("请求路径：",url);
 
+    return axios({
+        method: 'post',
+        url: `${base}${url}`,
+        data: params,
+        // transformRequest: [function (data) {
+        //   let ret = ''
+        //   for (let it in data) {
+        //     ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+        //   }
+        //   return ret
+        // }],
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+        }
+    });
+}
 export const postLoginRequest = (url, params) => {
   return axios({
     method: 'post',
@@ -81,23 +102,6 @@ export const postLoginRequest = (url, params) => {
     headers: {
       // 'Content-Type': 'application/json;charset=utf-8'
       'Content-Type': 'application/x-www-form-urlencoded'
-    }
-  });
-}
-export const postRequest = (url, params) => {
-  return axios({
-    method: 'post',
-    url: `${base}${url}`,
-    data: params,
-    // transformRequest: [function (data) {
-    //   let ret = ''
-    //   for (let it in data) {
-    //     ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
-    //   }
-    //   return ret
-    // }],
-    headers: {
-      'Content-Type': 'application/json;charset=utf-8'
     }
   });
 }

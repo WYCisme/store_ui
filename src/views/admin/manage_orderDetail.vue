@@ -95,7 +95,7 @@
         },
         computed:{
             manage_orderDetail(){
-                return this.$store.state.manage_orderDetail
+                return this.$store.state.orderDetail
             }
         }
     }

@@ -13,7 +13,7 @@
                                 <span >用户：{{user.username}} </span>
                                 <el-dropdown-menu slot="dropdown">
                                     <el-dropdown-item command="onUserInfo">个人中心</el-dropdown-item>
-                                    <el-dropdown-item command="onSetting">设置</el-dropdown-item>
+                                    <!--<el-dropdown-item command="onSetting">设置</el-dropdown-item>-->
                                     <el-dropdown-item command="logout" divided>注销</el-dropdown-item>
                                 </el-dropdown-menu>
                             </el-dropdown>
@@ -80,9 +80,7 @@
                         });
                     });
                 }else if(cmd === 'onUserInfo'){
-                    this.$router.push({path: '/userinfoP'});
-                }else if(cmd === 'onSetting'){
-                    this.$router.push({path: '/infoSettingP'});
+                    this.$router.push({path: '/userInfoSetting'});
                 }
             },
         },
@@ -110,7 +108,7 @@
     .el-main {
         padding: 0px;
         margin: 2px;
-        background-color: #E9EEF3;
+        background-color: #ffffff;
         color: #333;
         text-align: center;
         line-height: 160px;

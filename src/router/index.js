@@ -25,6 +25,18 @@ export default new Router({
           hidden: true
       },
       {
+          path: '/register',
+          name: 'Register',
+          component: ()=>import('../views/user/register'),
+          hidden: true
+      },
+      {
+          path: '/admin',
+          name: 'AdminLogin',
+          component: ()=>import('../views/user/admin_login'),
+          hidden: true
+      },
+      {
           path: '/home',
           name: '主页',
           component: Home,
@@ -33,6 +45,18 @@ export default new Router({
               requireAuth: true,
           },
           children: [
+              {
+                  path: '/userInfoSetting',
+                  name: '个人中心',
+                  component: ()=>import('../views/user/userInfoSetting'),
+                  hidden: true,
+                  meta: {
+                      requireAuth: true,
+                      keepAlive: false
+                  },
+
+              },
+
               {
                   path: '/home/goodsShow',
                   name: '商品展示',
